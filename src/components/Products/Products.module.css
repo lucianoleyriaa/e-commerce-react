@@ -1,0 +1,16 @@
+.section-products {
+   padding: 2rem 0;
+   margin-bottom: 2rem;
+}
+
+.section-products h2 {
+   color: #b8b6b6;
+   font-size: 2rem;
+   margin-bottom: 2rem;
+}
+
+.products__container {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   grid-column-gap: 2rem;
+}
