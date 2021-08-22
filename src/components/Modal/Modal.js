@@ -1,8 +1,11 @@
 import { Fragment } from "react";
 import Backdrop from "../Backdrop/Backdrop";
+import Carrito from "../Carrito/Carrito";
 import classes from "./Modal.module.css";
 
 const Modal = (props) => {
+   console.log(props.products);
+
    return (
       <Fragment>
          <Backdrop />
@@ -14,6 +17,7 @@ const Modal = (props) => {
             >
                X
             </p>
+            <Carrito products={props.products} />
          </div>
       </Fragment>
    );

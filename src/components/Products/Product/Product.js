@@ -3,6 +3,10 @@ import { Fragment } from "react";
 import classes from "./Product.module.css";
 
 const Product = (props) => {
+   const clickHandler = (e) => {
+      props.addToCarrito(props.product);
+   };
+
    return (
       <Fragment>
          <div className={classes.product__card}>
@@ -16,7 +20,7 @@ const Product = (props) => {
                </h3>
                <p>{props.product.description}</p>
                <div className={classes.product__btn}>
-                  <button>Agregar al Carrito</button>
+                  <button onClick={clickHandler}>Agregar al Carrito</button>
                </div>
             </div>
          </div>

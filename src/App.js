@@ -9,6 +9,9 @@ import { useState } from "react";
 
 function App() {
    const [isOpen, changeModal] = useState(false);
+   const [productsOnCarrito, addProduct] = useState([]);
+
+   console.log(productsOnCarrito);
 
    const closeModal = () => {
       changeModal(false);
@@ -18,10 +21,16 @@ function App() {
       <Fragment>
          <Header changeModalState={changeModal} modalState={isOpen} />
          <main className={classes.main}>
-            <Productos />
+            <Productos addProduct={addProduct} products={productsOnCarrito} />
          </main>
          <Footer />
-         {isOpen ? <Modal closeModal={closeModal} /> : null}
+         {isOpen ? (
+            <Modal
+               closeModal={closeModal}
+               products={productsOnCarrito}
+               addProduct={addProduct}
+            />
+         ) : null}
       </Fragment>
    );
 }
