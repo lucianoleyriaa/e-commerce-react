@@ -4,15 +4,24 @@ import Productos from "./components/Products/Products";
 import Footer from "./components/Footer/Footer";
 
 import classes from "./App.module.css";
+import Modal from "./components/Modal/Modal";
+import { useState } from "react";
 
 function App() {
+   const [isOpen, changeModal] = useState(false);
+
+   const closeModal = () => {
+      changeModal(false);
+   };
+
    return (
       <Fragment>
-         <Header />
+         <Header changeModalState={changeModal} modalState={isOpen} />
          <main className={classes.main}>
             <Productos />
          </main>
          <Footer />
+         {isOpen ? <Modal closeModal={closeModal} /> : null}
       </Fragment>
    );
 }
