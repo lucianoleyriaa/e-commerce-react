@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 import classes from "./Carrito.module.css";
 import CarritoItem from "./CarritoItem/CarritoItem";
@@ -17,7 +17,9 @@ const Carrito = (props) => {
                      return <CarritoItem key={product.id} product={product} />;
                   })
                ) : (
-                  <p>Aun no hay productos en tu carrito!</p>
+                  <div className={classes.carrito__message}>
+                     <p>Aun no hay productos en tu carrito!</p>
+                  </div>
                )}
             </ul>
          </div>

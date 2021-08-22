@@ -50,6 +50,7 @@
    font-size: 1.2rem;
    color: #333;
    transition: all 0.2s ease-in-out;
+   cursor: pointer;
 }
 
 .product__btn button:hover {

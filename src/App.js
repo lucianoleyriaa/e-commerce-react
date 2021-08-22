@@ -11,8 +11,6 @@ function App() {
    const [isOpen, changeModal] = useState(false);
    const [productsOnCarrito, addProduct] = useState([]);
 
-   console.log(productsOnCarrito);
-
    const closeModal = () => {
       changeModal(false);
    };
