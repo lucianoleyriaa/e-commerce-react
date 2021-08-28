@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 import classes from "./Carrito.module.css";
 import CarritoItem from "./CarritoItem/CarritoItem";
