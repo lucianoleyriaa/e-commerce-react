@@ -1,6 +1,7 @@
 .header {
    /* background-color: #55c57a; */
-   background-color: #7ed56f;
+   /* background-color: #7ed56f; */
+   background-color: rgb(79,70,229);
    padding: 1.5rem;
    display: flex;
    justify-content: space-between;
@@ -19,12 +20,8 @@
    border-bottom: 1px solid white;
    cursor: pointer;
    transition: all 0.2s;
-   background-color: #7ed56f;
 }
 
 .header__carrito:hover {
-   transform: translateY(-2px) scale(1.05);
-   box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.2);
-   background-color: #f7f7f7;
-   color: #55c57a;
+   transform: translateY(-2px) scale(1.02);
 }
