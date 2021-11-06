@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import Modal from '../Modal/Modal'
