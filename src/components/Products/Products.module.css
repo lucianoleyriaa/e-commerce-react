@@ -1,6 +1,9 @@
 .section-products {
-   padding: 2rem 0;
+   padding: 3rem;
+   border: 1px solid rgb(229, 231, 235);
    margin-bottom: 2rem;
+   background-color: #f7f8f9;
+   border-radius: 10px;
 }
 
 .section-products h2 {
@@ -11,6 +14,8 @@
 
 .products__container {
    display: grid;
-   grid-template-columns: repeat(4, 1fr);
+   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
    grid-column-gap: 2rem;
+   grid-row-gap: 2rem;
+   grid-auto-rows: auto;
 }

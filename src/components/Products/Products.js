@@ -3,7 +3,7 @@ import Product from "./Product/Product";
 
 import classes from "./Products.module.css";
 
-const Productos = (props) => {
+const Products = (props) => {
    const productsList = [
       {
          id: 1,
@@ -27,6 +27,38 @@ const Productos = (props) => {
          description:
             "HyperX Cloud II fueron diseñados como audífonos ultra cómodos con un sonido majestuoso. ",
          img: "mouse-hyperx-pulsefire.jpg",
+         price: 1200,
+      },
+      {
+         id: 4,
+         product: "Microfono Hyperx",
+         description:
+            "HyperX Cloud II fueron diseñados como audífonos ultra cómodos con un sonido majestuoso. ",
+         img: "microphone-hyperx.jpg",
+         price: 1200,
+      },
+      {
+         id: 4,
+         product: "Microfono Hyperx",
+         description:
+            "HyperX Cloud II fueron diseñados como audífonos ultra cómodos con un sonido majestuoso. ",
+         img: "microphone-hyperx.jpg",
+         price: 1200,
+      },
+      {
+         id: 4,
+         product: "Microfono Hyperx",
+         description:
+            "HyperX Cloud II fueron diseñados como audífonos ultra cómodos con un sonido majestuoso. ",
+         img: "microphone-hyperx.jpg",
+         price: 1200,
+      },
+      {
+         id: 4,
+         product: "Microfono Hyperx",
+         description:
+            "HyperX Cloud II fueron diseñados como audífonos ultra cómodos con un sonido majestuoso. ",
+         img: "microphone-hyperx.jpg",
          price: 1200,
       },
       {
@@ -63,4 +95,4 @@ const Productos = (props) => {
    );
 };
 
-export default Productos;
+export default Products;
