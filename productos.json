@@ -1,0 +1,51 @@
+[
+   {
+      "id": 1,
+      "product": "Airiculares Hyperx",
+      "description":"HyperX Cloud II fueron diseñados como audífonos ultra cómodos con un sonido majestuoso. ",
+      "img": "headphones-hyperx.jpg",
+      "price": 1200,
+      "features:": [
+         "Función inalámbrica perfecta para juegos con una batería duradera",
+         "Comodidad exclusiva",
+         "Audio de juego envolvente",
+         "Cascos que giran 90 grados con efectos de iluminación LED",
+         "Micrófono desmontable con cancelación del ruido"
+      ]
+   },
+   {
+      "id": 2,
+      "product": "Teclado Hyperx Origins",
+      "description":"El HyperX Alloy Origins™ Core es un teclado ultracompacto y resistente sin zona numérica con conmutadores mecánicos ",
+      "img": "keyboard-hyperx.jpg",
+      "price": 2500
+   },
+   {
+      "id": 3, 
+      "product": "",
+      "descripction": "",
+      "img": "",
+      "price": ""
+   },
+   {
+      "id": 3, 
+      "product": "Mouse Hyperx Pulsefire",
+      "descripction": "HyperX Cloud II fueron diseñados como audífonos ultra cómodos con un sonido majestuoso. ",
+      "img": "mouse-hyperx-pulsefire.jpg",
+      "price": 1200
+   },
+   {
+      "id": 4, 
+      "product": "Microfono Hyperx",
+      "descripction": "HyperX Cloud II fueron diseñados como audífonos ultra cómodos con un sonido majestuoso. ",
+      "img": "microphone-hyperx.jpg",
+      "price": 1200
+   },
+   {
+      "id": 3, 
+      "product": "",
+      "descripction": "",
+      "img": "",
+      "price": ""
+   }
+]

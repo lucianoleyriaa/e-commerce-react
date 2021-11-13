@@ -11,6 +11,18 @@
    column-gap: 2rem;
 }
 
+.button__back {
+   margin-bottom: 1.2rem;
+   text-decoration: none;
+   display: inline-block;
+   color: rgb(79,70,229);
+}
+
+.button__back:hover {
+   color: rgb(69, 62, 202);
+   text-decoration: underline
+}
+
 .detail__image {
    width: 100%;
 }

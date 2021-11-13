@@ -14,10 +14,14 @@ const Product = (props) => {
       history.push(`/productos/ver-detalle/${id}`)
    }
 
+   const addToCart = (id) => {
+
+   }
+
    return (
       <Fragment>
-         <div className={classes.product__card} onClick={() => navigateTo(props.product.id)}>
-            <div className={classes.product__img}>
+         <div className={classes.product__card}>
+            <div className={classes.product__img} onClick={() => navigateTo(props.product.id)}>
                <img src={`../images/${props.product.img}`} alt=""></img>
             </div>
 
@@ -27,6 +31,8 @@ const Product = (props) => {
                </h3>
                <span className={classes.product__price}>$2500</span>
             </div>
+
+            <button className={classes.product__button} onClick={() => addToCart(props.product.id)} >Agregar al carrito</button>
          </div>
       </Fragment>
    );

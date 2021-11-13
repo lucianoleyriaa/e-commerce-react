@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductDetail.module.css'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 const ProductDetail = () => {
    const params = useParams();
    const [product, setProduct] = useState({});
@@ -49,6 +49,8 @@ const ProductDetail = () => {
 
    return (
       <div className={styles.section__detail}>
+
+         <Link to='/productos' className={styles.button__back}>Volver</Link>
 
          <div className={styles.detail__container}>
             <div className={styles["detail__image-container"]}>
