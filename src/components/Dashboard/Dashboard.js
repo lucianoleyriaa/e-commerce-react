@@ -16,12 +16,9 @@ const Dashboard = () => {
       changeModal(false);
    };
 
-   console.log('Dashboard')
-
    return (
       <Fragment>
          <Header changeModalState={changeModal} modalState={isOpen} />
-         {/* <Productos addProduct={addProduct} products={productsOnCarrito} /> */}
          <main className={classes.main}>
             <Switch>
                <Route path='/productos/ver-detalle/:id' exact component={ProductDetail} />

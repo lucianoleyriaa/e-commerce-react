@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/AuthProvider';
 
@@ -46,7 +46,6 @@ const Signup = () => {
 
       signUp(email, password);
 
-      // console.log(user);
       history.push('/productos');
 
    }
@@ -80,37 +79,37 @@ const Signup = () => {
                   <label className="form__label">Usuario</label>
                   <input
                      type='text'
-                     className={`form__input ${checkValid(errors["user"]) ? "is-invalid" : ""}`}
+                     className={`form__input ${checkValid(errors["user"]) ? "invalid__input" : ""}`}
                      name='user'
                      onChange={onInputChange} />
-                  {checkValid(errors["user"]) && <small>Debes ingresar un nombre de usuario</small>}
+                  {checkValid(errors["user"]) && <small className="invalid__input--msg">Debes ingresar un nombre de usuario</small>}
                </div>
                <div className="form__group">
                   <label className="form__label">Email</label>
                   <input
                      type='text'
-                     className={`form__input ${checkValid(errors["email"]) ? "is-invalid" : ""}`}
+                     className={`form__input ${checkValid(errors["email"]) ? "invalid__input" : ""}`}
                      name='email'
                      onChange={onInputChange} />
-                  {checkValid(errors["user"]) && <small>Debes ingresar un email</small>}
+                  {checkValid(errors["user"]) && <small className="invalid__input--msg">Debes ingresar un email</small>}
                </div>
                <div className="form__group">
                   <label className="form__label">Contraseña</label>
                   <input
                      type='password'
-                     className={`form__input ${checkValid(errors["password"]) ? "is-invalid" : ""}`}
+                     className={`form__input ${checkValid(errors["password"]) ? "invalid__input" : ""}`}
                      name='password'
                      onChange={onInputChange} />
-                  {checkValid(errors["user"]) && <small>Debes ingresar una contraseña</small>}
+                  {checkValid(errors["user"]) && <small className="invalid__input--msg">Debes ingresar una contraseña</small>}
                </div>
                <div className="form__group">
                   <label className="form__label">Confirmar contraseña</label>
                   <input
                      type='password'
-                     className={`form__input ${checkValid(errors["confirmPassword"]) ? "is-invalid" : ""}`}
+                     className={`form__input ${checkValid(errors["confirmPassword"]) ? "invalid__input" : ""}`}
                      name='confirmPassword'
                      onChange={onInputChange} />
-                  {checkValid(errors["user"]) && <small>Debes confirmar tu contraseña</small>}
+                  {checkValid(errors["user"]) && <small className="invalid__input--msg">Debes confirmar tu contraseña</small>}
                </div>
                <div className='form__group'>
                   <button className="button button--success" type='submit'>Crear cuenta</button>

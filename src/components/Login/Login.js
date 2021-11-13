@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from '../../context/AuthProvider';
 
@@ -72,19 +72,19 @@ const Login = () => {
                   <label className="form__label">Email</label>
                   <input
                      type='text'
-                     className={`form__input ${checkValid(errors["email"]) ? "is-invalid" : ""}`}
+                     className={`form__input ${checkValid(errors["email"]) ? "invalid__input" : ""}`}
                      name='email'
                      onChange={onInputChange} />
-                  {checkValid(errors["email"]) && <small>Debes ingresar un email</small>}
+                  {checkValid(errors["email"]) && <small className='invalid__input--msg'>Debes ingresar un email</small>}
                </div>
                <div className="form__group">
                   <label className="form__label">Contraseña</label>
                   <input
                      type='password'
-                     className={`form__input ${checkValid(errors["password"]) ? "is-invalid" : ""}`}
+                     className={`form__input ${checkValid(errors["password"]) ? "invalid__input" : ""}`}
                      name='password'
                      onChange={onInputChange} />
-                  {checkValid(errors["password"]) && <small>Debes ingresar una contraseña</small>}
+                  {checkValid(errors["password"]) && <small className='invalid__input--msg'>Debes ingresar una contraseña</small>}
                </div>
                <div className='form__group'>
                   <button

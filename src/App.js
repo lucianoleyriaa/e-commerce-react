@@ -4,11 +4,10 @@ import RoutesConfig from "./components/Routes/RoutesConfig";
 
 function App() {
 
-
    return (
-      <div>
+      <Fragment>
          <RoutesConfig />
-      </div>
+      </Fragment>
    );
 }
 
