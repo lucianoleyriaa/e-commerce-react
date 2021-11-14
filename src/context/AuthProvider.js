@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from 'firebase/auth';
 
@@ -10,7 +10,13 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
-   const [currentUser, setCurrentUser] = useState();
+   const [currentUser, setCurrentUser] = useState({});
+
+   useEffect(() => {
+      onAuthStateChanged(auth, user => {
+         setCurrentUser(user);
+      });
+   });
 
    // Allow you to create an account and sign in at the same time
    const signUp = async (email, password) => {
@@ -26,10 +32,6 @@ export const AuthProvider = ({ children }) => {
    const logout = async () => {
       return await signOut(auth);
    }
-
-   onAuthStateChanged(auth, user => {
-      setCurrentUser(user);
-   });
 
    const value = {
       currentUser,
