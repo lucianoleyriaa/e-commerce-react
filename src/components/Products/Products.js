@@ -1,12 +1,12 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import Product from "./Product/Product";
+import { useAuth } from "../../context/AuthProvider";
 
 import classes from "./Products.module.css";
 
 const Products = (props) => {
-   /* States */
-/* Editado desde git bash */
-   const [products, setProducts] = useState([]);
+   // Hooks
+   const { addProducts, products } = useAuth();
 
    useEffect(() => {
       fetchProducts();
@@ -18,16 +18,12 @@ const Products = (props) => {
 
          const products = Object.values(response);
 
-         setProducts(prevState => [...prevState, ...products]);
+         addProducts(products)
 
       } catch (e) {
          console.log(e);
       }
    }
-
-   const addToCarrito = (product) => {
-      props.addProduct([...props.products, product]);
-   };
 
    return (
       <Fragment>
@@ -39,7 +35,6 @@ const Products = (props) => {
                      <Product
                         key={product.id}
                         product={product}
-                        addToCarrito={addToCarrito}
                      />
                   );
                })}

@@ -11,6 +11,8 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
    const [currentUser, setCurrentUser] = useState({});
+   const [cartItems, setCartItems] = useState([]);
+   const [products, setProducts] = useState([]);
 
    useEffect(() => {
       onAuthStateChanged(auth, user => {
@@ -33,11 +35,35 @@ export const AuthProvider = ({ children }) => {
       return await signOut(auth);
    }
 
+   // Allow you to add items into the cart
+   const addToCart = (id) => {
+      const item = products.filter(product => product.id === id);
+      setCartItems((prevState) => {
+         return [...prevState, ...item]
+      });
+   }
+
+   // Allow you to delete a product from the cart
+   const deleteFromCart = (id) => {
+      const productsInCart = cartItems.filter(product => product.id !== id);
+      setCartItems(productsInCart);
+   }
+
+   // Allow you to save the products
+   const addProducts = (products) => {
+      setProducts(products);
+   }
+
    const value = {
       currentUser,
       signUp,
       login,
-      logout
+      logout,
+      addToCart,
+      deleteFromCart,
+      cartItems,
+      products,
+      addProducts
    }
 
    return (
