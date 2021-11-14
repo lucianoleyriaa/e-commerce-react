@@ -1,21 +1,16 @@
 import { Fragment } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../../../context/AuthProvider";
 
 import classes from "./Product.module.css";
 
 const Product = (props) => {
+   // Hooks
    const history = useHistory();
-
-   const clickHandler = (e) => {
-      props.addToCarrito(props.product);
-   };
+   const { addToCart } = useAuth();
 
    const navigateTo = (id) => {
       history.push(`/productos/ver-detalle/${id}`)
-   }
-
-   const addToCart = (id) => {
-
    }
 
    return (

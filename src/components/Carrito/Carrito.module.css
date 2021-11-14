@@ -1,3 +1,10 @@
+.carrito__container {
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
 .carrito {
    padding: 2rem;
 }
@@ -16,5 +23,17 @@
 .carrito__message {
    font-size: 1.2rem;
    color: #b8b6b6;
+   font-weight: 700;
+}
+
+.carrito__footer {
+   padding: 32px 40px;
+   margin-bottom: .5rem;
+   align-self: flex-start;
+}
+
+.carrito__footer h3 {
+   color: #b8b6b6;
+   font-size: 32px;
    font-weight: 700;
 }

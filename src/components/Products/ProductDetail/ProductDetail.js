@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProductDetail.module.css'
 import { Link, useParams } from 'react-router-dom'
+import { useAuth } from '../../../context/AuthProvider';
 const ProductDetail = () => {
+   // Hooks
    const params = useParams();
+   const { addToCart } = useAuth();
+
+   // States
    const [product, setProduct] = useState({});
 
    const productsList = [
@@ -68,7 +73,7 @@ const ProductDetail = () => {
                </div>
 
                <div className={styles["detail__button-container"]}>
-                  <button className={styles.detail__button}>Agregar al carrito</button>
+                  <button className={styles.detail__button} onClick={() => { addToCart(product.id) }} >Agregar al carrito</button>
                </div>
 
                <div className={styles.detail__features}>
