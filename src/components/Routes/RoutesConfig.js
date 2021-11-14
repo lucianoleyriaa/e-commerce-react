@@ -4,6 +4,8 @@ import { AuthProvider } from '../../context/AuthProvider';
 import Dashboard from '../Dashboard/Dashboard';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
+import GuardRoute from './GuardRoute';
+import PrivateRoutes from './PrivateRoutes';
 
 const RoutesConfig = () => {
    return (
@@ -13,9 +15,9 @@ const RoutesConfig = () => {
                <Route path='/' exact >
                   <Redirect to='/productos' />
                </Route>
-               <Route path='/login' exact component={Login} />
+               <GuardRoute path='/login' exact component={Login} />
                <Route path='/signup' exact component={Signup} />
-               <Route path='/productos' component={Dashboard} />
+               <PrivateRoutes path='/productos' Component={Dashboard} />
             </Switch>
          </AuthProvider>
       </Fragment>

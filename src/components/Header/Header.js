@@ -1,7 +1,5 @@
 import { Fragment } from "react";
 import { useAuth } from "../../context/AuthProvider";
-import { auth } from "../../firebase";
-import { onAuthStateChanged } from "@firebase/auth";
 
 import classes from "./Header.module.css";
 import { useHistory } from "react-router";
@@ -16,13 +14,8 @@ const Header = (props) => {
 
    const onLogoutHandler = () => {
       logout();
+      return history.push('/login');
    }
-
-   onAuthStateChanged(auth, user => {
-      if (!user) {
-         return history.push('/login');
-      }
-   })
 
    return (
       <Fragment>

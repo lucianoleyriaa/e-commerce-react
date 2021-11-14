@@ -70,3 +70,12 @@ body {
    cursor: pointer;
    margin-top: 1.2rem;
 }
+
+.invalid__input {
+   border: 1.5px solid rgb(223, 35, 35);
+}
+
+.invalid__input--msg {
+   color: rgb(223, 35, 35);
+   padding-left: 4px;
+}
