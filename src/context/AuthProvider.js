@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
    const [currentUser, setCurrentUser] = useState({});
    const [cartItems, setCartItems] = useState([]);
    const [products, setProducts] = useState([]);
+   const [showAlert, setShowAlert] = useState(false);
 
    useEffect(() => {
       onAuthStateChanged(auth, user => {
@@ -41,6 +42,8 @@ export const AuthProvider = ({ children }) => {
       setCartItems((prevState) => {
          return [...prevState, ...item]
       });
+      setShowAlert(true);
+      setTimeout(() => { setShowAlert(false) }, 3000)
    }
 
    // Allow you to delete a product from the cart
@@ -63,7 +66,8 @@ export const AuthProvider = ({ children }) => {
       deleteFromCart,
       cartItems,
       products,
-      addProducts
+      addProducts,
+      showAlert
    }
 
    return (

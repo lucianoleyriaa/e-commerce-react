@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { useAuth } from '../../context/AuthProvider'
+import Alert from '../Alert/Alert'
 import Footer from '../Footer/Footer'
 import Header from '../Header/Header'
 import Modal from '../Modal/Modal'
@@ -9,6 +11,10 @@ import Products from '../Products/Products'
 import classes from './Dashboard.module.css';
 
 const Dashboard = () => {
+   // Hooks
+   const { showAlert } = useAuth()
+
+   // States
    const [isOpen, changeModal] = useState(false);
    const [productsOnCarrito, addProduct] = useState([]);
 
@@ -17,7 +23,7 @@ const Dashboard = () => {
    };
 
    return (
-      <Fragment>
+      <div className='layout'>
          <Header changeModalState={changeModal} modalState={isOpen} />
          <main className={classes.main}>
             <Switch>
@@ -33,7 +39,8 @@ const Dashboard = () => {
                addProduct={addProduct}
             />
          ) : null}
-      </Fragment>
+         {showAlert && <Alert />}
+      </div>
    )
 }
 
