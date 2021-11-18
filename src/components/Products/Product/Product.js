@@ -24,7 +24,7 @@ const Product = (props) => {
                <h3 className={classes.product__name}>
                   {props.product.product}
                </h3>
-               <span className={classes.product__price}>$2500</span>
+               <span className={classes.product__price}>${props.product.price}</span>
             </div>
 
             <button className={classes.product__button} onClick={() => addToCart(props.product.id)} >Agregar al carrito</button>
