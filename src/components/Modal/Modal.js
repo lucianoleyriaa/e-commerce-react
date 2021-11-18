@@ -4,8 +4,6 @@ import Carrito from "../Carrito/Carrito";
 import classes from "./Modal.module.css";
 
 const Modal = (props) => {
-   console.log(props.products);
-
    return (
       <Fragment>
          <Backdrop />

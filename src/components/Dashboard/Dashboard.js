@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { useAuth } from '../../context/AuthProvider'
 import Alert from '../Alert/Alert'
