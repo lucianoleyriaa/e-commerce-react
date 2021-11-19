@@ -14,6 +14,8 @@ export const AuthProvider = ({ children }) => {
    const [cartItems, setCartItems] = useState([]);
    const [products, setProducts] = useState([]);
    const [showAlert, setShowAlert] = useState(false);
+   const [filterProducts, setFilterProducts] = useState([]);
+   const [isSearching, setIsSearching] = useState(false);
 
    useEffect(() => {
       onAuthStateChanged(auth, user => {
@@ -67,7 +69,11 @@ export const AuthProvider = ({ children }) => {
       cartItems,
       products,
       addProducts,
-      showAlert
+      showAlert,
+      setFilterProducts,
+      filterProducts,
+      isSearching,
+      setIsSearching
    }
 
    return (

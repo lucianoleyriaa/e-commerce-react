@@ -3,10 +3,11 @@ import Product from "./Product/Product";
 import { useAuth } from "../../context/AuthProvider";
 
 import classes from "./Products.module.css";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Products = (props) => {
    // Hooks
-   const { addProducts, products } = useAuth();
+   const { addProducts, products, filterProducts, isSearching } = useAuth();
 
    useEffect(() => {
       fetchProducts();
@@ -28,9 +29,25 @@ const Products = (props) => {
    return (
       <Fragment>
          <div className={classes["section-products"]}>
-            <h2>Productos</h2>
+            <div className={classes["section-products__header"]}>
+               <h2>Productos</h2>
+               <SearchBar />
+            </div>
             <div className={classes.products__container}>
-               {products.map((product) => {
+               {isSearching && filterProducts.length ? filterProducts.map(product => {
+                  return (
+                     <Product
+                        key={product.id}
+                        product={product}
+                     />
+                  )
+               }) :
+                  null
+               }
+
+               {isSearching && !filterProducts.length ? <p>No se encontraron resultados</p> : null}
+
+               {!isSearching && products.map((product) => {
                   return (
                      <Product
                         key={product.id}
@@ -38,6 +55,7 @@ const Products = (props) => {
                      />
                   );
                })}
+
             </div>
          </div>
       </Fragment>

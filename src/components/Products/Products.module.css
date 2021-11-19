@@ -6,6 +6,12 @@
    border-radius: 10px;
 }
 
+.section-products__header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
 .section-products h2 {
    color: #b8b6b6;
    font-size: 2rem;
@@ -14,8 +20,13 @@
 
 .products__container {
    display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   grid-template-columns: repeat(auto-fit, 300px);
    grid-column-gap: 2rem;
    grid-row-gap: 2rem;
    grid-auto-rows: auto;
+}
+
+.not-found__message {
+   color: rgb(66, 66, 66);
+   font-weight: bold;
 }
