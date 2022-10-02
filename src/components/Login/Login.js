@@ -1,103 +1,76 @@
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom';
-import { useAuth } from '../../context/AuthProvider';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import { startingLogin } from '../../store/auth/thunks';
+
+import { useForm } from '../../hooks';
 
 import styles from './Login.module.css';
 
+const loginFormData = {
+    email: '',
+    password: '',
+}
+
+const loginFormValidations = {
+    'email': [ ( value ) => value.includes('@'), 'Ingresa un email valido' ],
+    'password': [ ( value ) => value.length >= 6, 'La contraseña debe contener mas de 6 caracteres' ],
+}
+
 const Login = () => {
-   // Hooks
-   const { login, currentUser } = useAuth();
-   const history = useHistory();
 
-   // Initial state
-   const initialState = {
-      email: '',
-      password: '',
-   }
+    const dispatch = useDispatch();
+   
+    const { email, password, emailValid, passwordValid, onInputChange, isFormValid } = useForm(loginFormData, loginFormValidations);
+    const [ formSubmitted, setFormSubmitted ] = useState(false);
 
-   // States
-   const [userData, setUserData] = useState(initialState);
-   const [errors, setErrors] = useState({});
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        setFormSubmitted(true);
 
-   const onInputChange = (e) => {
-      setUserData(prevState => {
-         return { ...prevState, [e.target.name]: e.target.value }
-      });
-   }
+        if (!isFormValid) return;
 
-   const onSubmitHandler = (e) => {
-      e.preventDefault();
+        dispatch( startingLogin(email, password) );
+    }
 
-      if (Object.keys(validateInputs(userData, ["email", "password"])).length) {
-         return setErrors(validateInputs(userData, ["email", "password"]));
-      }
-
-      setErrors({});
-
-      const { email, password } = userData;
-      login(email, password);
-
-      if (currentUser) {
-         return history.push('/productos');
-      }
-
-   }
-
-   // Validate inputs 
-   const validateInputs = (inputs, requiredFields) => {
-      const keyInputs = Object.keys(inputs);
-      const errors = {};
-
-      keyInputs.forEach((input) => {
-         if (!inputs[input] && requiredFields.includes(input)) {
-            errors[input] = `${input}__error`;
-         }
-      });
-
-      return errors;
-   };
-
-   // Check invalid inputs to show error messages
-   const checkValid = (field) => {
-      const value = Object.values(errors);
-      if (value.indexOf(field) !== -1) return true;
-      return false;
-   };
-
-   return (
-      <div className='container'>
-         <div className="form__container">
-            <form className="form" onSubmit={onSubmitHandler}>
-               <div className="form__group">
-                  <label className="form__label">Email</label>
-                  <input
-                     type='text'
-                     className={`form__input ${checkValid(errors["email"]) ? "invalid__input" : ""}`}
-                     name='email'
-                     onChange={onInputChange} />
-                  {checkValid(errors["email"]) && <small className='invalid__input--msg'>Debes ingresar un email</small>}
-               </div>
-               <div className="form__group">
-                  <label className="form__label">Contraseña</label>
-                  <input
-                     type='password'
-                     className={`form__input ${checkValid(errors["password"]) ? "invalid__input" : ""}`}
-                     name='password'
-                     onChange={onInputChange} />
-                  {checkValid(errors["password"]) && <small className='invalid__input--msg'>Debes ingresar una contraseña</small>}
-               </div>
-               <div className='form__group'>
-                  <button
-                     className={`${styles.button} ${styles["button--success"]}`}
-                  >Ingresar</button>
-               </div>
-            </form>
-            <div className={styles.signup__link}>
-               <Link to='/signup'>¿No tienes una cuenta? Registrate</Link>
+    return (
+        <div className='container'>
+            <div className="form__container">
+                <form className="form" onSubmit={ onSubmitHandler }>
+                    <div className="form__group">
+                        <label className="form__label">Email</label>
+                        <input
+                            type='text'
+                            className={`form__input`}
+                            name='email'
+                            value={ email }
+                            onChange={ onInputChange }  
+                            />
+                        {(emailValid && emailValid.length > 0 && formSubmitted) && <small className='invalid__input--msg'>{ emailValid }</small>}
+                    </div>
+                    <div className="form__group">
+                        <label className="form__label">Contraseña</label>
+                        <input
+                            type='password'
+                            className={`form__input`}
+                            name='password'
+                            value={ password }
+                            onChange={ onInputChange } />
+                        {(passwordValid && passwordValid.length > 0 && formSubmitted) && <small className='invalid__input--msg'>{ passwordValid }</small>}
+                    </div>
+                    <div className='form__group'>
+                        <button
+                            className={`${styles.button} ${styles["button--success"]}`}
+                        >Ingresar</button>
+                    </div>
+                </form>
+                    <div className={styles.signup__link}>
+                    <Link to='/signup'>¿No tienes una cuenta? Registrate</Link>
+                </div>
             </div>
-         </div>
-      </div>
-   )
+        </div>
+    )
 }
 
 export default Login;

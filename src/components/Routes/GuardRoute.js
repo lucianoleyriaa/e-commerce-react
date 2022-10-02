@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react'
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
-import { useAuth } from '../../context/AuthProvider';
 
 const GuardRoute = ({ component: Component, ...rest }) => {
-   const { currentUser } = useAuth();
+
+   const { authStatus } = useSelector( state => state.auth );
 
    return (
-      <Fragment>
-         {currentUser && <Redirect to='/productos' />}
-         {!currentUser && <Route {...rest} component={Component} />}
-      </Fragment>
+      <>
+         {authStatus === 'authenticated' && <Redirect to='/productos' />}
+         {authStatus !== 'authenticated' && <Route {...rest} component={Component} />}
+      </>
    )
 }
 

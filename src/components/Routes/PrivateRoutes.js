@@ -1,20 +1,19 @@
-import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { useAuth } from '../../context/AuthProvider';
-
 
 const PrivateRoutes = ({ route, Component }) => {
-   const { currentUser } = useAuth();
+
+   const { authStatus } = useSelector( state => state.auth );
 
    return (
-      <Fragment>
-         {currentUser &&
-            <Route path={route} component={Component} />
+      <>
+         { authStatus === 'authenticated' &&
+            <Route path={ route } component={ Component } />
          }
-         {!currentUser &&
+         { authStatus !== 'authenticated' &&
             <Redirect to='/login' />
          }
-      </Fragment>
+      </>
    )
 }
 
