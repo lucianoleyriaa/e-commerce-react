@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
    const [showAlert, setShowAlert] = useState(false);
    const [filterProducts, setFilterProducts] = useState([]);
    const [isSearching, setIsSearching] = useState(false);
+   const [showAlertModal, setShowAlertModal] = useState(false);
 
    useEffect(() => {
       onAuthStateChanged(auth, user => {
@@ -73,7 +74,9 @@ export const AuthProvider = ({ children }) => {
       setFilterProducts,
       filterProducts,
       isSearching,
-      setIsSearching
+      setIsSearching,
+      setShowAlertModal,
+      showAlertModal
    }
 
    return (

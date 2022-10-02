@@ -30,10 +30,24 @@
    padding: 32px 40px;
    margin-bottom: .5rem;
    align-self: flex-start;
+   width: 100%;
 }
 
 .carrito__footer h3 {
    color: #b8b6b6;
    font-size: 32px;
    font-weight: 700;
+}
+
+.btn__buy {
+   color: white;
+   background-color: rgb(28, 173, 28);
+   font-size: 1.2rem;
+   border-radius: 8px;
+   padding: .8rem 1.5rem;
+   display: block;
+   border: none;
+   width: 100%;
+   margin: 0.5rem auto;
+   cursor: pointer;
 }

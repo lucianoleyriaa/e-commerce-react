@@ -4,10 +4,13 @@ import { useAuth } from "../../context/AuthProvider";
 
 import classes from "./Products.module.css";
 import SearchBar from "../SearchBar/SearchBar";
+import AlertModal from "../Modal/AlertModal/AlertModal";
+
+const apiUrl = process.env.REACT_APP_FIREBASE_DATABASE_URL;
 
 const Products = (props) => {
    // Hooks
-   const { addProducts, products, filterProducts, isSearching } = useAuth();
+   const { addProducts, products, filterProducts, isSearching, showAlertModal } = useAuth();
 
    useEffect(() => {
       fetchProducts();
@@ -15,7 +18,7 @@ const Products = (props) => {
 
    const fetchProducts = async () => {
       try {
-         const response = await (await fetch(`https://e-commerce-a61d6-default-rtdb.firebaseio.com/productos.json`)).json();
+         const response = await (await fetch(`${ apiUrl }/productos.json`)).json();
 
          const products = Object.values(response);
 
@@ -58,6 +61,9 @@ const Products = (props) => {
 
             </div>
          </div>
+
+         {showAlertModal && <AlertModal />}
+
       </Fragment>
    );
 };

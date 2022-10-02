@@ -7,10 +7,18 @@ import classes from "./Product.module.css";
 const Product = (props) => {
    // Hooks
    const history = useHistory();
-   const { addToCart } = useAuth();
+   const { addToCart, currentUser, setShowAlertModal } = useAuth();
 
    const navigateTo = (id) => {
       history.push(`/productos/ver-detalle/${id}`)
+   }
+
+   const checkAuthUser = () => {
+      if (currentUser) {
+         addToCart(props.product.id)
+      } else {
+         setShowAlertModal(true);
+      }
    }
 
    return (
@@ -27,7 +35,7 @@ const Product = (props) => {
                <span className={classes.product__price}>${props.product.price}</span>
             </div>
 
-            <button className={classes.product__button} onClick={() => addToCart(props.product.id)} >Agregar al carrito</button>
+            <button className={classes.product__button} onClick={() => checkAuthUser()} >Agregar al carrito</button>
          </div>
       </Fragment>
    );

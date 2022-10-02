@@ -18,6 +18,7 @@ const RoutesConfig = () => {
                <GuardRoute path='/login' exact component={Login} />
                <Route path='/signup' exact component={Signup} />
                <PrivateRoutes path='/productos' Component={Dashboard} />
+               {/* <Route path='/productos' Component={Dashboard} /> */}
             </Switch>
          </AuthProvider>
       </Fragment>

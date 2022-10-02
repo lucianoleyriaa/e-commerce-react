@@ -46,6 +46,7 @@ const Carrito = (props) => {
             {cartItems.length > 0 ?
                <div className={classes.carrito__footer}>
                   <h3>Su compra: <span>${totalCart}</span> </h3>
+                  <button className={classes.btn__buy}>Comprar</button>
                </div>
                : null}
 
