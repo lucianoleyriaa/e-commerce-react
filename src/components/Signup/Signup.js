@@ -1,123 +1,108 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useAuth } from '../../context/AuthProvider';
+
+import { useForm } from '../../hooks/useForm';
+import { onStartSignUp } from '../../store/auth/thunks';
+
+const signUpFormData = {
+   username: '',
+   email: '',
+   password: '',
+   confirmPassword: ''
+}
+
+const signUpFormValidations = {
+    username: [( value ) => value.length >= 4, 'El nombre de usuario tiene que tener mas de 4 caracteres'],
+    email: [( value ) => value.includes('@'), 'Ingresa un email valido'],
+    password: [( value ) => value.length >= 6, 'La contraseña debe contener al menos 6 caracteres'],
+    confirmPassword: [ ( value ) => true, 'Las contrasñas no coincides' ],
+}
 
 const Signup = () => {
-   /* Accesing to the context */
-   const { signUp } = useAuth();
 
-   /* Initial state */
-   const initialData = {
-      user: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-   }
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-   /* States */
-   const [userData, setUserData] = useState(initialData);
-   const [errors, setErrors] = useState({});
-   const history = useHistory()
+    const { 
+            username, 
+            email, 
+            password, 
+            confirmPassword, 
+            usernameValid, 
+            emailValid, 
+            passwordValid, 
+            isFormValid,
+            onInputChange 
+        } = useForm(signUpFormData, signUpFormValidations);
 
-   /* Inputs changes handler */
-   const onInputChange = (e) => {
-      setUserData(prevState => {
-         return { ...prevState, [e.target.name]: e.target.value }
-      });
-   }
+    const [ formSubmitted, setFormSubmitted ] = useState(false);
+    const [ confirmPasswordValid, setConfirmPasswordValid ] = useState(true);
 
-   /* Submit handler */
-   const onSubmitHandler = (e) => {
-      e.preventDefault();
-      const requiredFields = [
-         "user",
-         "email",
-         "password",
-         "confirmPassword"
-      ]
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        setFormSubmitted(true);
+        
+        if (password !== confirmPassword) return setConfirmPasswordValid(false);
 
-      if (Object.keys(validateInputs(userData, requiredFields)).length) {
-         return setErrors(validateInputs(userData, requiredFields))
-      }
+        if (!isFormValid) return;
 
-      setErrors({});
+        dispatch( onStartSignUp(email, password, username) );
 
-      const { email, password } = userData;
+        history.push('/productos');
+    }
 
-      signUp(email, password);
-
-      history.push('/productos');
-
-   }
-
-   /* Validate inputs */
-   const validateInputs = (inputs, requiredFields) => {
-      const keyInputs = Object.keys(inputs);
-      const errors = {};
-
-      keyInputs.forEach((input) => {
-         if (!inputs[input] && requiredFields.includes(input)) {
-            errors[input] = `${input}__error`;
-         }
-      });
-
-      return errors;
-   };
-
-   /* Check invalid inputs to show error messages */
-   const checkValid = (field) => {
-      const value = Object.values(errors);
-      if (value.indexOf(field) !== -1) return true;
-      return false;
-   };
-
-   return (
-      <div className='container'>
-         <div className="form__container">
-            <form className="form" onSubmit={onSubmitHandler}>
-               <div className="form__group">
-                  <label className="form__label">Usuario</label>
-                  <input
-                     type='text'
-                     className={`form__input ${checkValid(errors["user"]) ? "invalid__input" : ""}`}
-                     name='user'
-                     onChange={onInputChange} />
-                  {checkValid(errors["user"]) && <small className="invalid__input--msg">Debes ingresar un nombre de usuario</small>}
-               </div>
-               <div className="form__group">
-                  <label className="form__label">Email</label>
-                  <input
-                     type='text'
-                     className={`form__input ${checkValid(errors["email"]) ? "invalid__input" : ""}`}
-                     name='email'
-                     onChange={onInputChange} />
-                  {checkValid(errors["user"]) && <small className="invalid__input--msg">Debes ingresar un email</small>}
-               </div>
-               <div className="form__group">
-                  <label className="form__label">Contraseña</label>
-                  <input
-                     type='password'
-                     className={`form__input ${checkValid(errors["password"]) ? "invalid__input" : ""}`}
-                     name='password'
-                     onChange={onInputChange} />
-                  {checkValid(errors["user"]) && <small className="invalid__input--msg">Debes ingresar una contraseña</small>}
-               </div>
-               <div className="form__group">
-                  <label className="form__label">Confirmar contraseña</label>
-                  <input
-                     type='password'
-                     className={`form__input ${checkValid(errors["confirmPassword"]) ? "invalid__input" : ""}`}
-                     name='confirmPassword'
-                     onChange={onInputChange} />
-                  {checkValid(errors["user"]) && <small className="invalid__input--msg">Debes confirmar tu contraseña</small>}
-               </div>
-               <div className='form__group'>
-                  <button className="button button--success" type='submit'>Crear cuenta</button>
-               </div>
-            </form>
-         </div>
-      </div>
-   )
+    return (
+        <div className='container'>
+            <div className="form__container">
+                <form className="form" onSubmit={onSubmitHandler}>
+                    <div className="form__group">
+                        <label className="form__label">Usuario</label>
+                        <input
+                            type='text'
+                            className='form__input'
+                            name='username'
+                            value={ username }
+                            onChange={ onInputChange } />
+                        {(usernameValid && usernameValid.length > 0 && formSubmitted) && <small className="invalid__input--msg">{ usernameValid }</small>}
+                    </div>
+                    <div className="form__group">
+                        <label className="form__label">Email</label>
+                        <input
+                            type='text'
+                            className='form__input'
+                            name='email'
+                            value={ email }
+                            onChange={ onInputChange } />
+                        {(emailValid && emailValid.length > 0 && formSubmitted) && <small className="invalid__input--msg">{ emailValid }</small>}
+                    </div>
+                    <div className="form__group">
+                        <label className="form__label">Contraseña</label>
+                        <input
+                            type='password'
+                            className='form__input'
+                            name='password'
+                            value={ password }
+                            onChange={ onInputChange } />
+                        {(passwordValid && passwordValid.length > 0 && formSubmitted) && <small className="invalid__input--msg">{ passwordValid }</small>}
+                    </div>
+                    <div className="form__group">
+                        <label className="form__label">Confirmar contraseña</label>
+                        <input
+                            type='password'
+                            className='form__input'
+                            name='confirmPassword'
+                            value={ confirmPassword }
+                            onChange={ onInputChange } />
+                        {(!confirmPasswordValid && formSubmitted) && <small className="invalid__input--msg">Las contraseñas no coinciden</small>}
+                    </div>
+                    <div className='form__group'>
+                        <button className="button button--success" type='submit'>Crear cuenta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
 }
 
 export default Signup

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { startingLogin } from '../../store/auth/thunks';
+import { onStartLogin } from '../../store/auth/thunks';
 
 import { useForm } from '../../hooks';
 
@@ -31,7 +31,7 @@ const Login = () => {
 
         if (!isFormValid) return;
 
-        dispatch( startingLogin(email, password) );
+        dispatch( onStartLogin(email, password) );
     }
 
     return (
