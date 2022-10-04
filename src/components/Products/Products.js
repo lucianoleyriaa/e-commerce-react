@@ -1,33 +1,27 @@
 import { Fragment, useEffect } from "react";
-import Product from "./Product/Product";
-import { useAuth } from "../../context/AuthProvider";
+import { useDispatch, useSelector } from 'react-redux';
 
-import classes from "./Products.module.css";
+import { useAuth } from "../../context/AuthProvider";
+import { onStartLoadingProducts } from "../../store";
+
+import Product from "./Product/Product";
 import SearchBar from "../SearchBar/SearchBar";
 import AlertModal from "../Modal/AlertModal/AlertModal";
 
-const apiUrl = process.env.REACT_APP_FIREBASE_DATABASE_URL;
+import classes from "./Products.module.css";
 
 const Products = (props) => {
+
+    const { products, isLoading } = useSelector( state => state.shop );
+    const dispatch = useDispatch();
+
    // Hooks
-   const { addProducts, products, filterProducts, isSearching, showAlertModal } = useAuth();
+//    Todo: Crear hooks para filtrar productos
+   const { filterProducts, isSearching, showAlertModal } = useAuth();
 
-   useEffect(() => {
-      fetchProducts();
-   }, []);
-
-   const fetchProducts = async () => {
-      try {
-         const response = await (await fetch(`${ apiUrl }/productos.json`)).json();
-
-         const products = Object.values(response);
-
-         addProducts(products)
-
-      } catch (e) {
-         console.log(e);
-      }
-   }
+    useEffect(() => {
+        dispatch( onStartLoadingProducts() );
+    }, []);
 
    return (
       <Fragment>
@@ -58,6 +52,16 @@ const Products = (props) => {
                      />
                   );
                })}
+
+               { (!isSearching && isLoading) && 
+                <>
+                    <div className="spinner-loader__container">
+                        <div className="spinner-border text-primary" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </> 
+               }
 
             </div>
          </div>

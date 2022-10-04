@@ -1,25 +1,24 @@
 import { Fragment } from "react";
+import { useDispatch} from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useAuth } from "../../../context/AuthProvider";
+
+import { onAddProductToCart } from "../../../store";
 
 import classes from "./Product.module.css";
 
 const Product = (props) => {
-   // Hooks
-   const history = useHistory();
-   const { addToCart, currentUser, setShowAlertModal } = useAuth();
+    // TODO: Refactorizar los props
+    const dispatch = useDispatch();
 
-   const navigateTo = (id) => {
-      history.push(`/productos/ver-detalle/${id}`)
-   }
+    const history = useHistory();
 
-   const checkAuthUser = () => {
-      if (currentUser) {
-         addToCart(props.product.id)
-      } else {
-         setShowAlertModal(true);
-      }
-   }
+    const navigateTo = (id) => {
+        history.push(`/productos/ver-detalle/${id}`)
+    }
+
+    const addProductToCart = () => {
+        dispatch( onAddProductToCart(props.product.id) );
+    }
 
    return (
       <Fragment>
@@ -35,7 +34,7 @@ const Product = (props) => {
                <span className={classes.product__price}>${props.product.price}</span>
             </div>
 
-            <button className={classes.product__button} onClick={() => checkAuthUser()} >Agregar al carrito</button>
+            <button className={classes.product__button} onClick={() => addProductToCart()} >Agregar al carrito</button>
          </div>
       </Fragment>
    );
