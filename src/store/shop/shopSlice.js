@@ -12,7 +12,7 @@ export const shopSlice = createSlice({
     reducers: {
         onSetProducts: ( state, action ) => {
             state.isLoading = false;
-            state.products = state.products.concat(action.payload);
+            state.products = action.payload;
         },
         onLoading: ( state, action ) => {
             state.isLoading = true;

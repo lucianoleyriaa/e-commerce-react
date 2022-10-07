@@ -1,14 +1,5 @@
-import { Fragment } from "react";
+import { RoutesConfig } from "./routes/RoutesConfig";
 
-import RoutesConfig from "./components/Routes/RoutesConfig";
-
-function App() {
-
-   return (
-      <Fragment>
-         <RoutesConfig />
-      </Fragment>
-   );
+export const App = () => {
+    return <RoutesConfig />;
 }
-
-export default App;
